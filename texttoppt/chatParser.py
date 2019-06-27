@@ -4,18 +4,16 @@ import json
 
 
 class WhatsAppChatParser:
-    def __init__(self, chateExportFile ):
+    def __init__(self, chatExportFile ):
         self.quoteList = []
         self.ignoredList = []
         self.quoteIndex = 0
         self.deletedPattern()
         self.author = 'All'
-        #self.__extractQuoteList(chateExportFile)
-
+       
     def SetMessageAuthor(self, author):
         self.author = author
 
-    #def SetSlideProperties(self, 
 
     def deletedPattern(self):
         messageYouDeletedMsgPattern = "^\s*\[.*\] .*: You deleted this message."
@@ -40,8 +38,8 @@ class WhatsAppChatParser:
         return (False)
 
 
-    def ExtractQuoteList(self, chateExportFile ):
-        fileHandler = open (chateExportFile, "r", encoding="utf8")
+    def ExtractQuoteList(self, chatExportFile ):
+        fileHandler = open (chatExportFile, "r", encoding="utf8")
         timeStamp = re.compile(".*\s*\[.*\]")
         if ( self.author == 'All' ):
             messageStartPattern = re.compile(".*\s*\[.*\] .*: ")
