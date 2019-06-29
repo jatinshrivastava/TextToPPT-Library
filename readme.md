@@ -9,6 +9,6 @@ Make sure you’re in the same directory as texttoppt folder and type this comma
 ```python
 python
 from texttoppt.orchestrator import TextToPPTOrchestrator
-orc = TextToPPTOrchestrator
+orc = TextToPPTOrchestrator()
 orc.ConvertTextFileToPPT('input.txt','output.pptx')
 ```
