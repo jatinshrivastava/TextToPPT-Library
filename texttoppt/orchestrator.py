@@ -8,6 +8,8 @@ from pptx.enum.shapes import MSO_SHAPE
 class TextToPPTOrchestrator:
     def __init__(self):
         self.author = 'All'
+        self.startDate = '01/01/00'
+        self.endDate = '01/01/68'
         self.shapeType = 'round rectangle'
         self.fontSize = int(28)
         self.left = float(0.5)
@@ -21,6 +23,12 @@ class TextToPPTOrchestrator:
     
     def SetMessageAuthor(self, author):
         self.author = author
+
+    def SetStartDate(self,startDate):
+        self.startDate = startDate
+
+    def SetEndDate(self,endDate):
+        self.endDate = endDate
 
     def SetFontSize(self, size ):
         self.fontSize = int(size)
@@ -43,6 +51,8 @@ class TextToPPTOrchestrator:
     def ConvertTextFileToPPT( self, inputfile , outputfile ):
         chatparser = WhatsAppChatParser(inputfile)
         chatparser.SetMessageAuthor(self.author)
+        chatparser.SetStartDate(self.startDate)
+        chatparser.SetEndDate(self.endDate)
         chatparser.ExtractQuoteList(inputfile)
         generator = SlideGenerator(outputfile)
         generator.SetFontSize(self.fontSize)

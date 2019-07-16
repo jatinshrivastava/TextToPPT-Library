@@ -5,14 +5,15 @@ from chatParser import WhatsAppChatParser
 class TestWhatsAppChatParser(unittest.TestCase):
     def test_ignore_deleted_messages(self):
         test_data_file = "deletedLinesTestData.txt"
-        expected_output_text = "Quote 2\n"
+        expected_output_text = "Quote 3\n"
 
         chatparser = WhatsAppChatParser(test_data_file)
         chatparser.SetMessageAuthor("Aashish")
         chatparser.ExtractQuoteList(test_data_file)
         first_quote = chatparser.getNextQuote()
         second_quote = chatparser.getNextQuote()
-        actual_output = second_quote
+        Third_quote = chatparser.getNextQuote()
+        actual_output = Third_quote
 
         self.assertEqual(actual_output, expected_output_text)
 
@@ -27,3 +28,29 @@ class TestWhatsAppChatParser(unittest.TestCase):
         actual_output = chatparser.getNextQuote()
 
         self.assertEqual(actual_output, expected_output_text)
+
+    def test_messages_on_or_after_a_date(self):
+    	test_data_file = "dateFilterTestData.txt"
+    	message1 = "Quote4\n"
+    	message2 = "Quote5\n"
+    	chatparser = WhatsAppChatParser(test_data_file)
+    	chatparser.SetMessageAuthor("All")
+    	chatparser.SetStartDate("16/11/19")
+    	chatparser.ExtractQuoteList(test_data_file)
+    	self.assertEqual(chatparser.getNextQuote(), message1)
+    	self.assertEqual(chatparser.getNextQuote(), message2)
+
+    def test_messages_on_or_before_a_date(self):
+    	test_data_file = "dateFilterTestData.txt"
+    	message1 = "Quote3\n"
+    	message2 = "Quote4\n"
+    	message3 = "Quote5\n"
+    	chatparser = WhatsAppChatParser(test_data_file)
+    	chatparser.SetMessageAuthor("All")
+    	chatparser.SetStartDate("15/11/19")
+    	chatparser.SetEndDate("18/12/19")
+    	chatparser.ExtractQuoteList(test_data_file)
+    	self.assertEqual(chatparser.getNextQuote(), message1)
+    	self.assertEqual(chatparser.getNextQuote(), message2)
+    	self.assertEqual(chatparser.getNextQuote(), message3)
+    	#self.assertRaises(Exception,chatparser.getNextQuote())
