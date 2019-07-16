@@ -15,7 +15,7 @@ class WhatsAppChatParser:
         self.deletedPattern()
         self.author = 'All'
         self.startDate = '01/01/00'
-        self.endDate = '01/01/98'
+        self.endDate = '01/01/68'
        
     def SetMessageAuthor(self, author):
         self.author = author
