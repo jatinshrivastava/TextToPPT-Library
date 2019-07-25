@@ -67,12 +67,18 @@ class WhatsAppChatParser:
         messageOtherDeletedMsgPattern = ".*This message was deleted."
         messageWebsiteLinkPattern = ".*http"
         messageOmitted = ".Media omitted"
+        imageOmitted = ".image omitted"
+        gifOmitted = ".GIF omitted"
+        videoOmitted = ".video omitted"
         messageEncryption = ".*Messages to this chat"
         messageGroupEncryption = ".*Messages to this group"
         self.ignoredList.append(messageYouDeletedMsgPattern)
         self.ignoredList.append(messageOtherDeletedMsgPattern)
         self.ignoredList.append(messageWebsiteLinkPattern)
         self.ignoredList.append(messageOmitted)
+        self.ignoredList.append(imageOmitted)
+        self.ignoredList.append(gifOmitted)
+        self.ignoredList.append(videoOmitted)
         self.ignoredList.append(messageEncryption)
         self.ignoredList.append(messageGroupEncryption)
 
@@ -119,7 +125,7 @@ class WhatsAppChatParser:
             self.insideMessage = False
 
     def appendMessageToQuoteList(self):
-        if (len(self.message) > 5):
+        if (len(self.message) >=0 ):
             self.message = re.sub(r'\n+', '\n', self.message).strip()
             self.quoteList.append(self.message)
             #print(self.message)
