@@ -1,4 +1,4 @@
-import re
+﻿import re
 import sys
 import json
 import datetime
@@ -67,20 +67,32 @@ class WhatsAppChatParser:
         messageOtherDeletedMsgPattern = ".*This message was deleted."
         messageWebsiteLinkPattern = ".*http"
         messageOmitted = ".Media omitted"
-        imageOmitted = ".image omitted"
+        documentOmitted = ".document omitted"
+        imageOmitted = ".‎image omitted"
+        videoOmitted = ".‎video omitted"
+        audioOmitted = ".‎audio omitted"
         gifOmitted = ".GIF omitted"
-        videoOmitted = ".video omitted"
         messageEncryption = ".*Messages to this chat"
         messageGroupEncryption = ".*Messages to this group"
+        messageGroupSubjectChange = ".*changed the subject to “.*”"
+        messageGroupDescriptionChanged = ".*changed the group description"
+        messageGroupDescriptionDeleted = ".*deleted the group description"
         self.ignoredList.append(messageYouDeletedMsgPattern)
         self.ignoredList.append(messageOtherDeletedMsgPattern)
         self.ignoredList.append(messageWebsiteLinkPattern)
         self.ignoredList.append(messageOmitted)
-        self.ignoredList.append(imageOmitted)
-        self.ignoredList.append(gifOmitted)
-        self.ignoredList.append(videoOmitted)
+        self.ignoredList.append(documentOmitted) 
+        self.ignoredList.append(imageOmitted) 
+        self.ignoredList.append(videoOmitted) 
+        self.ignoredList.append(audioOmitted) 
+        self.ignoredList.append(gifOmitted) 
         self.ignoredList.append(messageEncryption)
         self.ignoredList.append(messageGroupEncryption)
+        self.ignoredList.append(messageGroupSubjectChange) 
+        self.ignoredList.append(messageGroupDescriptionChanged) 
+        self.ignoredList.append(messageGroupDescriptionDeleted) 
+        
+        
 
 
 
@@ -125,10 +137,9 @@ class WhatsAppChatParser:
             self.insideMessage = False
 
     def appendMessageToQuoteList(self):
-        if (len(self.message) >=0 ):
+        if (len(self.message) > 5):
             self.message = re.sub(r'\n+', '\n', self.message).strip()
             self.quoteList.append(self.message)
-            #print(self.message)
 
     	
 

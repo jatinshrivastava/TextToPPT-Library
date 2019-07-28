@@ -55,11 +55,32 @@ class TestWhatsAppChatParser(unittest.TestCase):
     	self.assertEqual(chatparser.getNextQuote(), message2)
     	self.assertEqual(chatparser.getNextQuote(), message3)
 
+    def test_emoji(self):
+        test_data_file = "emojiTestData.txt"
+        message1 = "Quote 11"
+        message2 = "Quote 12"
+        chatparser = WhatsAppChatParser(test_data_file)
+        chatparser.ExtractQuoteList(test_data_file)
+        self.assertEqual(chatparser.getNextQuote(), message1)
+        self.assertEqual(chatparser.getNextQuote(), message2)
+
     def test_capability_to_process_two_digits_date(self):
-    	pass
+        pass
 
     def test_capability_to_process_android_dateformat(self):
-    	pass
+        test_data_file = "androidDateTestData.txt"
+        message1 = "Quote 1"
+        message2 = "Quote 3"
+        chatparser = WhatsAppChatParser(test_data_file)
+        chatparser.ExtractQuoteList(test_data_file)
+        self.assertEqual(chatparser.getNextQuote(), message1)
+        self.assertEqual(chatparser.getNextQuote(), message2)
 
     def test_capability_to_process_ios_dateformat(self):
-    	pass
+        test_data_file = "iosDateTestData.txt"
+        message1 = "Quote 1"
+        message2 = "Quote 3"
+        chatparser = WhatsAppChatParser(test_data_file)
+        chatparser.ExtractQuoteList(test_data_file)
+        self.assertEqual(chatparser.getNextQuote(), message1)
+        self.assertEqual(chatparser.getNextQuote(), message2)
